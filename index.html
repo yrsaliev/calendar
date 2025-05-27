@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Date Picker</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <h2>Select a date</h2>
+  <input id="datepicker" placeholder="Choose a date" />
+
+  <script>
+    flatpickr("#datepicker", {
+      enableTime: false, // or true if you want time too
+      dateFormat: "Y-m-d",
+      onChange: function(selectedDates) {
+        const selected = selectedDates[0].toISOString();
+        Telegram.WebApp.sendData(selected);  // Send selected date to bot
+        Telegram.WebApp.close();             // Optional: auto close
+      }
+    });
+  </script>
+</body>
+</html>
